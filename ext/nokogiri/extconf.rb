@@ -20,6 +20,10 @@ def darwin?
   RbConfig::CONFIG['target_os'] =~ /darwin/
 end
 
+def aix?
+  RbConfig::CONFIG['target_os'] =~ /aix/
+end
+
 def nix?
   ! (windows? || solaris? || darwin?)
 end
@@ -400,7 +404,7 @@ if windows?
   $CFLAGS << " -DXP_WIN -DXP_WIN32 -DUSE_INCLUDED_VASPRINTF"
 end
 
-if solaris?
+if solaris? or aix?
   $CFLAGS << " -DUSE_INCLUDED_VASPRINTF"
 end
 
